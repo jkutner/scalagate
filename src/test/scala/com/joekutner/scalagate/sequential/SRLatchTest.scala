@@ -13,22 +13,27 @@ class SRLatchTest extends AssertionsForJUnit {
   @Test def verifyTruthTable() {
     val uut:SRLatch = new SRLatch();
 
+    // S=1, R=0
     var out = uut.in(true,false);
     Assert.assertEquals(false, out._1);
     Assert.assertEquals(true, out._2);
 
+    // S=1, R=1 (after S=1, R=0)
     out = uut.in(true,true);
     Assert.assertEquals(false, out._1);
     Assert.assertEquals(true, out._2);
 
+    // S=0, R=1
     out = uut.in(false,true);
     Assert.assertEquals(true, out._1);
     Assert.assertEquals(false, out._2);
 
+    // S=1, R=1 (after S=0, R=1)
     out = uut.in(true,true);
     Assert.assertEquals(true, out._1);
     Assert.assertEquals(false, out._2);
 
+    // S=0, R=0
     out = uut.in(false,false);
     Assert.assertEquals(true, out._1);
     Assert.assertEquals(true, out._2);
@@ -60,6 +65,7 @@ class SRLatchTest extends AssertionsForJUnit {
 
     var out = uut.in(false,false,true);
 
+    // S=0, R=1, C=1 => Q=0
     out = uut.in(false,true,true);
     Assert.assertEquals(false, out._1);
 
@@ -102,5 +108,28 @@ class SRLatchTest extends AssertionsForJUnit {
     out = uut.in(true,false,false);
     Assert.assertEquals(false, out._1);
     Assert.assertEquals(true, out._2);
+  }
+
+  @Test def verifyTruthTableWithControl2() {
+    val uut:SRLatch = new SRLatch();
+
+    // S=X, R=X, C=0
+    var q1 = uut.in(true,false,false);
+
+    // S=0, R=0, C=1
+    val q2 = uut.in(false,false,true);
+
+    // S=0, R=1, C=1
+    val q3 = uut.in(false,true,true);
+
+    // S=1, R=0, C=1
+    val q4 = uut.in(true,false,true);
+
+    // S=1, R=1, C=1
+    val q5 = uut.in(true,true,true);
+
+    Assert.assertEquals(q1._1, q2._1)
+    Assert.assertFalse(q3._1)
+    Assert.assertTrue(q5._1)
   }
 }
