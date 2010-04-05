@@ -16,4 +16,8 @@ class DFlipFlop {
     var out2 = sr2.in(out1._2, c);
     return sr3.in(out2._2, out1._1);
   }
+
+  def out():Tuple2[Boolean, Boolean] = {
+    sr3.out
+  }
 }

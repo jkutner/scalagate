@@ -16,5 +16,12 @@ class DLatchTest extends AssertionsForJUnit {
 
     out = uut.in(true, true)
     Assert.assertEquals(true, out._1)
+
+    out = uut.in(true, false)
+    Assert.assertEquals(true, out._1)
+
+    out = uut.in(false, false)
+    Assert.assertEquals(true, out._1)
+
   }
 }

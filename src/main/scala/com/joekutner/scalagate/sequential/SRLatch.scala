@@ -18,6 +18,10 @@ class SRLatch {
     q = SRLatch.in(set, reset, control, q);
     return q;
   }
+
+  def out():Tuple2[Boolean, Boolean] = {
+    q
+  }
 }
 
 object SRLatch {
