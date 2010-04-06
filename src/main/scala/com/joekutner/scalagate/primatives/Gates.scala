@@ -6,13 +6,9 @@ package com.joekutner.scalagate.primatives
 
 object Gates {
 
-//  def and(x:Boolean, y:Boolean):Boolean = x && y
-
   def xor(x:Boolean, y:Boolean):Boolean = (x && !y) || (!x && y)
 
   def not(x:Boolean):Boolean = !x
-
-//  def or(x:Boolean, y:Boolean):Boolean = x || y
 
   def eq(x:Boolean, y:Boolean):Boolean = x == y
 
@@ -21,7 +17,6 @@ object Gates {
   def nand(x:Boolean, y:Boolean):Boolean = !(x && y)
 
   def nor(x:Boolean, y:Boolean):Boolean = !(x || y)
-
 
   def and(xs:Boolean*):Boolean = !xs.exists(x => !x)
 
